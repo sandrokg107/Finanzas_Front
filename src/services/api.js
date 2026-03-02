@@ -1,7 +1,11 @@
 import axios from 'axios'
 
 // URL base de tu Backend FastAPI
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'
+const fallbackApiUrl = import.meta.env.DEV
+  ? 'http://localhost:8000/api/v1'
+  : 'https://finanzas-back-4k2g.onrender.com/api/v1'
+
+const API_URL = (import.meta.env.VITE_API_URL || fallbackApiUrl).replace(/\/$/, '')
 
 const api = axios.create({
   baseURL: API_URL,
